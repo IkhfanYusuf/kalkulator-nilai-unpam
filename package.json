@@ -1,0 +1,26 @@
+{
+  "name": "kalkulator-nilai-unpam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "tailwindcss -i ./src/input.css -o ./dist/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IkhfanYusuf/kalkulator-nilai-unpam.git"
+  },
+  "author": "Ikhfan Yusuf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IkhfanYusuf/kalkulator-nilai-unpam/issues"
+  },
+  "homepage": "https://github.com/IkhfanYusuf/kalkulator-nilai-unpam#readme"
+}
