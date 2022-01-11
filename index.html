@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="card w-11/12 shadow-xl mx-auto mb-4">
+
+            <form class="p-6">
+                <h2 class="font-semibold text-gray-600 text-center text-lg">Kalkulator Nilai Universitas Pamulang
+                </h2>
+                <small class="font-semibold mb-5 text-center block text-gray-500">Created with <svg
+                        xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block text-pink-400"
+                        viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                            clip-rule="evenodd" />
+                    </svg> by Ikhfan Yusuf</small>
+                <div class="form-group mb-2">
+                    <select id="sks" type="text"
+                        class="text-gray-500 w-full border border-gray-200 rounded-full font-semibold outline-none py-1 px-4 active:border-indigo-500 hover:border-indigo-500"
+                        placeholder="Presensi" required>
+                        <option value="">-- Pilih Jumlah SKS --</option>
+                        <option value="14">2 SKS</option>
+                        <option value="18">3 SKS</option>
+                    </select>
+                </div>
+                <div class="form-group mb-2">
+                    <input id="presensi" type="text"
+                        class=" w-full border border-gray-200 rounded-full font-semibold outline-none py-1 px-4 active:border-indigo-500 hover:border-indigo-500"
+                        placeholder="Presensi">
+                </div>
+                <div class="form-group mb-2">
+                    <input id="tugas" type="text"
+                        class="w-full border border-gray-200 rounded-full font-semibold outline-none py-1 px-4 active:border-indigo-500 hover:border-indigo-500"
+                        placeholder="Tugas">
+                </div>
+                <div class="form-group mb-2">
+                    <input id="uts" type="text"
+                        class="w-full border border-gray-200 rounded-full font-semibold outline-none py-1 px-4 active:border-indigo-500 hover:border-indigo-500"
+                        placeholder="UTS">
+                </div>
+                <div class="form-group mb-4">
+                    <input id="uas" type="text"
+                        class="w-full border border-gray-200 rounded-full font-semibold outline-none py-1 px-4 active:border-indigo-500 hover:border-indigo-500"
+                        placeholder="UAS">
+                </div>
+                <div class="form-group text-right">
+                    <button
+                        class="rounded-full bg-indigo-600 text-bold px-4 py-1 border border-indigo-600 text-white">Hitung</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card w-11/12 shadow-xl mx-auto mb-4" id="result">
+
+
+        </div>
+
+    </div>
+
+    <script>
+        const form = document.querySelector('form')
+
+        let nilaiPresensi, nilaiTugas, nilaiUts, nilaiUas, score, grade
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            const sks = document.getElementById('sks').value
+            const presensi = document.getElementById('presensi').value
+            const tugas = document.getElementById('tugas').value
+            const uts = document.getElementById('uts').value
+            const uas = document.getElementById('uas').value
+
+            nilaiPresensi = Math.round((presensi / sks) * 10)
+            nilaiTugas = Math.round((tugas / 100) * 20)
+            nilaiUts = Math.round((uts / 100) * 30)
+            nilaiUas = Math.round((uas / 100) * 40)
+            score = Math.round(nilaiPresensi + nilaiTugas + nilaiUts + nilaiUas)
+            console.log(nilaiPresensi, nilaiTugas, nilaiUts, nilaiUas)
+
+            if (score >= 80 && score <= 100) {
+                grade = "A"
+            } else if (score >= 70 && score < 80) {
+                grade = "B"
+            } else if (score >= 60 && score < 70) {
+                grade = "C"
+            } else if (score >= 50 && score < 60) {
+                grade = "D"
+            } else if (score < 50) {
+                grade = "E"
+            }
+
+            document.getElementById('result').innerHTML = `
+            <div class="p-6">
+                <div class="flex justify-between">
+                    <span class="font-semibold text-sm leading-loose">Presensi</span>
+                    <span class="font-semibold text-sm leading-loose">=> ${presensi}/${sks} x 10 <i class="text-xs">(bobot
+                            10%)</i> =
+                        ${nilaiPresensi}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold text-sm leading-loose">Tugas</span>
+                    <span class="font-semibold text-sm leading-loose">=> ${tugas}/100 x 20 <i class="text-xs">(bobot
+                            20%)</i> =
+                            ${nilaiTugas}</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="font-semibold text-sm leading-loose">Uts</span>
+                    <span class="font-semibold text-sm leading-loose">=> ${uts}/100 x 30 <i class="text-xs">(bobot
+                            30%)</i> =
+                            ${nilaiUts}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold text-sm leading-loose">Uas</span>
+                    <span class="font-semibold text-sm leading-loose">=> ${uas}/100 x 40 <i class="text-xs">(bobot
+                            40%)</i> =
+                            ${nilaiUas}</span>
+                </div>
+                <div class="grid grid-cols-12 items-center justify-between">
+                    <hr class="col-span-11 border-2 border-indigo-500 mt-1">
+                    <span class="col-span-1 text-indigo-500 font-bold text-3xl text-right"> + </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold leading-loose text-xl">Score</span>
+                    <span class="font-semibold leading-loose text-xl">=> ${score}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-semibold leading-loose text-xl">Grade</span>
+                    <span class="font-semibold leading-loose text-5xl text-indigo-500">${grade}</span>
+                </div>
+
+            </div>
+            `
+
+        })
+    </script>
+
+</body>
+
+</html>
